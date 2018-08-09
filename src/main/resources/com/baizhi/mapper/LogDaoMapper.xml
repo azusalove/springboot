@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.LogDao">
+
+    <insert id="insertLog" parameterType="Log">
+    insert into log values(#{id},#{username},#{createDate},#{record},#{arg})
+  </insert>
+
+    <select id="serlectLogAll" resultType="Log" parameterType="java.lang.Integer">
+    select * from log limit #{start},#{end}
+  </select>
+
+    <select id="LogCount" resultType="java.lang.Integer">
+    select count(id) from log
+  </select>
+
+    <select id="selectLog" resultType="Log">
+    select * from log
+  </select>
+
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 使用mapper文件，实现dao接口 -->
+<!-- namespace属性 指定要实现的接口(全限定名) -->
+<mapper namespace="com.baizhi.dao.AlbumDAO">
+    <resultMap id="all" type="Album">
+        <id column="aid" property="id"/>
+        <result column="atitle" property="title"/>
+        <result column="ascore" property="score"/>
+        <result column="aauthor" property="author"/>
+        <result column="abroadcast" property="broadcast"/>
+        <result column="acount" property="count"/>
+        <result column="abrief" property="brief"/>
+        <result column="apublishDate" property="publishDate"/>
+        <result column="acoverImg" property="coverImg"/>
+        <result column="astatus" property="status"/>
+        <result column="acreateDate" property="createDate"/>
+        <collection property="children" ofType="Chapter">
+            <id column="cid" property="id"/>
+            <result column="ctitle" property="title"/>
+            <result column="curl" property="url"/>
+            <result column="csize" property="size"/>
+            <result column="cduration" property="duration"/>
+            <result column="ccreateDate" property="createDate"/>
+            <result column="calbumId" property="albumId"/>
+        </collection>
+    </resultMap>
+
+    <sql id="album">
+        SELECT
+            a.id aid,
+            a.title atitle,
+            a.score ascore,
+            a.author aauthor,
+            a.broadcast abroadcast,
+            a.count acount,
+            a.brief abrief,
+            a.publishDate apublishDate,
+            a.coverImg acoverImg,
+            a. STATUS astatus,
+            a.createDate acreateDate,
+            c.id cid,
+            c.title ctitle,
+            c.url curl,
+            c.size csize,
+            c.duration cduration,
+            c.createDate ccreateDate,
+            c.albumId calbumId
+        FROM
+            album a
+        LEFT JOIN chapter c ON c.albumId = a.id
+    </sql>
+
+    <select id="showAll" resultMap="all">
+        <include refid="album"/>
+    </select>
+    <insert id="addAlbum">
+        INSERT INTO album VALUES (#{id}, #{title}, #{score}, #{author}, #{broadcast}, #{count}, #{brief}, #{publishDate}, #{coverImg}, #{status}, #{createDate})
+    </insert>
+</mapper>

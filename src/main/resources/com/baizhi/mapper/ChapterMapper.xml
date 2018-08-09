@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 使用mapper文件，实现dao接口 -->
+<!-- namespace属性 指定要实现的接口(全限定名) -->
+<mapper namespace="com.baizhi.dao.ChapterDAO">
+    <insert id="addChapter">
+        INSERT INTO chapter VALUES (#{id}, #{title}, #{url}, #{size}, #{duration}, #{createDate}, #{albumId})
+    </insert>
+</mapper>
